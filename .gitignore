@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.bak
+ProjectSettings/ShaderGraphSettings.asset
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
