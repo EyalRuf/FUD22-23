@@ -1,31 +1,23 @@
 ﻿using UnityEngine;
 using System.IO;
-using System.Printing;
+using SmartDLL;
 
 public class PrintTest : MonoBehaviour
 {
-    PrintQueue printQueue;
+    public SmartPrinter smartPrinter = new SmartPrinter();
+    string headerDirectory = "D:/Hanze/Y4/Future Design/evidence/concept_fleshed_3.PNG";
+
     void Start()
     {
-        LocalPrintServer localPrintServer = new LocalPrintServer();
-        printQueue = localPrintServer.GetPrintQueue("Lexmark Printer");
+        Print();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Print();
-        }
     }
 
     void Print()
     {
-        var writer = new StreamWriter("print.txt");
-        writer.WriteLine("Hello, Lexmark Printer!");
-        writer.Close();
-        var printServer = new PrintServer();
-        var printQueue = new PrintQueue(printServer, "Lexmark Printer");
-        var printJob = printQueue.AddJob("print.txt", "print.txt", false);
+        smartPrinter.PrintDocument("blabla", @headerDirectory);
     }
 }
