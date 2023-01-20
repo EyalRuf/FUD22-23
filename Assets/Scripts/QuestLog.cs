@@ -23,6 +23,9 @@ public class QuestLog : MonoBehaviour
     public Image quest2Checkmark;
     public Image quest3Checkmark;
 
+    public GameObject QuestProgUIPanel;
+    public GameObject QuestDoneUIPanel;
+
     public Sprite checkmarkEmpty;
     public Sprite checkmarkFilled;
 
@@ -71,6 +74,10 @@ public class QuestLog : MonoBehaviour
         
         quest3Checkmark.enabled = quests[currQuest].Count > 2;
         quest3Checkmark.sprite = quests[currQuest].Count > 2 && quests[currQuest][2].isDone ? checkmarkFilled : checkmarkEmpty;
+
+
+        QuestProgUIPanel.SetActive(prog < quests[currQuest].Count);
+        QuestDoneUIPanel.SetActive(prog == quests[currQuest].Count);
     }
 
     public void StartQuest (int questNm) 
