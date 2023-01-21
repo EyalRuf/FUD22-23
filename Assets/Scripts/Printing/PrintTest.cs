@@ -5,20 +5,10 @@ using SmartDLL;
 public class PrintTest : MonoBehaviour
 {
     public SmartPrinter smartPrinter = new SmartPrinter();
-    string headerDirectory;
 
-    void Start()
+    public void Print(string ImageName)
     {
-        headerDirectory = Application.dataPath + "/Prints/ass.PNG";
-        Print();
-    }
-
-    void Update()
-    {
-    }
-
-    void Print()
-    {
-        //smartPrinter.PrintDocument("blabla", @headerDirectory);
+        string headerDirectory = Application.dataPath + "/Prints/" + ImageName + ".PNG";
+        smartPrinter.PrintDocument("", @headerDirectory);
     }
 }

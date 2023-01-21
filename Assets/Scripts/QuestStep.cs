@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class QuestStep : MonoBehaviour
@@ -20,9 +21,19 @@ public class QuestStep : MonoBehaviour
 
     }
 
-    public void CompleteStep ()
+    virtual public void CompleteStep ()
     {
         isDone = true;
         ql.UpdateQuestLog();
+    }
+
+    virtual public string GetQuestText(int v)
+    {
+        return questText;
+    }
+
+    virtual public bool isQuestDone(int v)
+    {
+        return isDone;
     }
 }
