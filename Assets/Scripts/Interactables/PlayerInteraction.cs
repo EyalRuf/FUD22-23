@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class PlayerInteraction : MonoBehaviour
 
     public Interactable currInteractableInSight;
     public PlayerInput playerInput;
+
+    public Image crosshair;
+    public Color crosshairActive;
+    public Color crosshairNotActive;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +28,8 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         RaycastInteractable();
+
+        crosshair.color = currInteractableInSight != null ? crosshairActive : crosshairNotActive;
     }
 
     private void onInteractionBtn(InputAction.CallbackContext context)
@@ -40,6 +47,8 @@ public class PlayerInteraction : MonoBehaviour
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, rayDistance, raycastMask))
         {
             newInteractableInSIght = hit.collider.GetComponent<Interactable>();
+            if (newInteractableInSIght == null)
+                newInteractableInSIght = hit.collider.GetComponentInParent<Interactable>();
         }
 
         if (currInteractableInSight != null && currInteractableInSight != newInteractableInSIght)

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class QuestInteractable : Interactable
 {
+    public QuestLog ql;
     public QuestStep questStep;
     public bool doesDisappear;
 
@@ -25,14 +26,15 @@ public class QuestInteractable : Interactable
     {
         base.Interact();
 
-        if (questStep.isQuestActive)
+        if (questStep.isQuestActive && !questStep.isQuestDone(ql.printIndex))
         {
             questStep.CompleteStep();
 
             if (doesDisappear)
             {
-                meshRenderer.enabled = false;
-                collider.enabled = false;
+                if (meshRenderer != null) meshRenderer.enabled = false;
+                if (collider != null) collider.enabled = false;
+                Destroy(gameObject);
             }
         }
     }
